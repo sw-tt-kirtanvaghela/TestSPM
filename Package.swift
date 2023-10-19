@@ -18,9 +18,18 @@ let package = Package(
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "IoTConnectSPM"),
+            name: "IoTConnectSPM",
+            dependencies: [
+                .target(name: "IoTConnect_2_0"),
+                .product(name: "CocoaMQTT", package: "CocoaMQTT"),
+            ]
+        ),
         .testTarget(
             name: "IoTConnectSPMTests",
             dependencies: ["IoTConnectSPM"]),
+        .binaryTarget(
+            name: "IoTConnect_2_0",
+            path: "./Sources/IoTConnect_2_0.xcframework")
     ]
 )
+
